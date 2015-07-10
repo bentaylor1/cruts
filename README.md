@@ -14,8 +14,7 @@ library(lubridate)
 library(ncdf)
 library(rgdal)
 
-* this dataset contains a SpatialPolygonsDataFram polygon 'ama', I want to crop
-* the CRU TS dataset to this polygon
+* this dataset contains a SpatialPolygonsDataFram polygon 'ama', I want to crop the CRU TS dataset to this polygon
     
     load("mydir/polygon_data.RData") 
 
@@ -31,7 +30,6 @@ library(rgdal)
         
     temp <- cruts2poly(ncfile=fln,poly=ama,timeRange=c("2004-01-01","2013-12-31"),na.rm=TRUE)
 
-* this function returns your polygon with anomalies either as a raster brick or if a SpatialPolygonsDataFrame is specified, 
-* the data averaged over each region
+* this function returns your polygon with anomalies either as a raster brick or if a SpatialPolygonsDataFrame is specified, the data averaged over each region
         
     anom <- getAnomaly(ncfile=fln,poly=ama,timeRange=c("2004-01-01","2013-12-31"),na.rm=TRUE)
