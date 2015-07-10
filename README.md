@@ -7,18 +7,24 @@ http://catalogue.ceda.ac.uk/uuid/ac4ecbd554d0dd52a9b575d9666dc42d
 This is an R package for reading in and manipulating CRU TS3.21: Climatic Research Unit (CRU) Time-Series (TS) Version 3.21 data. A test script is below
 
 library(cruts)
+
 library(sp)
+
 library(raster)
+
 library(stringr)
+
 library(lubridate)
+
 library(ncdf)
+
 library(rgdal)
 
 * this dataset contains a SpatialPolygonsDataFram polygon 'ama', I want to crop the CRU TS dataset to this polygon
     
     load("mydir/polygon_data.RData") 
 
-* the unzipped NetCDF file containing the data, I ahve only tested the package on this file
+* the unzipped NetCDF file containing the data, I have only tested the package on this file
     
     fln <- "mydir/cru_ts3.21.1901.2012.tmp.dat.nc"
 
