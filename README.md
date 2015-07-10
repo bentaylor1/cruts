@@ -8,7 +8,7 @@ This is an R package for reading in and manipulating CRU TS3.21: Climatic Resear
 
 * First load all required packages
 
-library(cruts);library(sp);library(raster);library(stringr);library(lubridate);library(ncdf);library(rgdal)
+    library(cruts);library(sp);library(raster);library(stringr);library(lubridate);library(ncdf);library(rgdal)
 
 * this dataset contains a SpatialPolygonsDataFram polygon 'ama', I want to crop the CRU TS dataset to this polygon
     
