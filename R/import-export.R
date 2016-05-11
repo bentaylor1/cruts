@@ -16,7 +16,7 @@
 
 cruts2raster <- function(ncfile,timeRange=NULL,poly=NULL,offset="1900-01-01",type="stack"){
 
-    nc <- open.ncdf(ncfile)
+    nc <- nc_open(ncfile)
     lon <- nc$dim$lon$vals
     lat <- nc$dim$lat$vals
     time <- nc$dim$time$vals
@@ -52,7 +52,9 @@ cruts2raster <- function(ncfile,timeRange=NULL,poly=NULL,offset="1900-01-01",typ
     pb <- txtProgressBar(min=tmin,max=tmax,style=3)
     for(i in tmin:tmax){
 
-        lay <- extractNetCDF(nc,start=c(1,1,i))
+        ii <- i - tmin + 1
+
+        lay <- extractNetCDF(nc,start=c(1,1,ii))
         lay <- raster(t(lay[,N:1]), xmn=lon[1]-dx/2, xmx=lon[M]+dx/2, ymn=lat[1]-dy/2, ymx=lat[N]+dy/2, crs=CRS("+init=epsg:4326"))
         if(is.null(poly)){         
             rlist <- c(rlist,lay)
@@ -63,7 +65,7 @@ cruts2raster <- function(ncfile,timeRange=NULL,poly=NULL,offset="1900-01-01",typ
         setTxtProgressBar(pb,i) 
     }
     close(pb)
-    close.ncdf(nc)
+    nc_close(nc)
     names(rlist) <- as.character(times[tmin:tmax])
 
     if(type=="stack"){
@@ -149,7 +151,7 @@ extractNetCDF <- function(nc,start=NULL,count=NULL){
         count <- c(-1,-1,1)           
     }
     
-    x <- get.var.ncdf(nc=nc, varid=nc$var[[1]], start=start, count=count)
+    x <- ncvar_get(nc=nc, varid=nc$var[[1]], start=start, count=count)
 
     return(x)
 }
