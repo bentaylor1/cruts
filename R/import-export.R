@@ -21,6 +21,7 @@ cruts2raster <- function(ncfile,timeRange=NULL,poly=NULL,offset="1900-01-01",typ
     lat <- nc$dim$lat$vals
     time <- nc$dim$time$vals
     cstime <- time[1] + cumsum(diff(time))
+    cstime <- c(time[1], cstime) # Thanks to Bikash Parida for this bug fix
     d <- sapply(nc$dim,function(x){x$len}) # dimension
 
     starttime <- as.Date(offset)
